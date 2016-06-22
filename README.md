@@ -1,9 +1,22 @@
-Codiad is a web-based IDE framework with a small footprint and minimal requirements. We have added a few plugins. More can be added in the marketplace in the WebUI.
+# Supported tags and respective `Dockerfile` links
 
-* Collaboration - https://github.com/Codiad/Codiad-Collaborative
-* Terminal - https://github.com/Fluidbyte/Codiad-Terminal
-* CodeGit - https://github.com/Andr3as/Codiad-CodeGit
-* Drag and Drop - https://github.com/Andr3as/Codiad-DragDrop
+  * [`latest` (Dockerfile)](https://github.com/wernight/docker-codiad/blob/master/Dockerfile)
+
+
+## What is Codiad
+
+Codiad is a web-based IDE framework with a small footprint and minimal requirements.
+
+## Features of this image
+
+We have added a few plugins by default:
+
+  * Collaboration - https://github.com/Codiad/Codiad-Collaborative
+  * Terminal - https://github.com/Fluidbyte/Codiad-Terminal
+  * CodeGit - https://github.com/Andr3as/Codiad-CodeGit
+  * Drag and Drop - https://github.com/Andr3as/Codiad-DragDrop
+
+More can be added in the marketplace in the WebUI.
 
 
 ## Usage
@@ -13,7 +26,7 @@ docker run -p 80:80 \
     -v /etc/localtime:/etc/localtime:ro \
     -v $PWD/config:/config \
     -e PUID=$UID -e PGID=$GID \
-    linuxserver/codiad
+    wernight/codiad
 ```
 
 **Parameters:**
@@ -34,15 +47,15 @@ Part of what makes our containers work so well is by allowing you to specify you
 
 ## Setting up the application 
 
-* use /config/projects to save your projects, for data persistence
-* change /config/www/plugins/Codiad-CodeGit-master/shell.sh to add Git User/Pass
-* change /config/www/plugins/Codiad-Terminal-master/emulator/term.php to change terminal password
+  * use `/config/projects` to save your projects, for data persistence
+  * change `/config/www/plugins/Codiad-CodeGit-master/shell.sh` to add Git User/Pass
+  * change `/config/www/plugins/Codiad-Terminal-master/emulator/term.php` to change terminal password
 
 
 ## Updates
 
-* Upgrade to the latest version simply `docker restart codiad`.
-* To monitor the logs of the container in realtime `docker logs -f codiad`.
+  * Upgrade to the latest version simply `docker restart codiad`.
+  * To monitor the logs of the container in realtime `docker logs -f codiad`.
 
 
 ## Versions
@@ -52,4 +65,4 @@ Part of what makes our containers work so well is by allowing you to specify you
 
 ## Feedbacks
 
-Suggestions are welcome on our [GitHub issue tracker]().
+Suggestions are welcome on our [GitHub issue tracker](https://github.com/wernight/docker-codiad/issues).
