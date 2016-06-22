@@ -3,14 +3,14 @@ MAINTAINER Werner Beroux <werner@beroux.com>
 
 # Install required packages.
 RUN set -x \
-    apt-get update -q && \
-    apt-get install -q -y \
+ && apt-get update -q \
+ && apt-get install -q -y \
         git \
         expect \
-        php5-ldap && \
+        php5-ldap \
     # Cleanup
-    apt-get clean -y && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+ && apt-get clean -y \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add some files .
 COPY defaults/ /defaults/
