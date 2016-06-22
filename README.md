@@ -7,6 +7,9 @@
 
 Codiad is a web-based IDE framework with a small footprint and minimal requirements.
 
+![Screenshot of Codiad](docs/screenshot.png)
+
+
 ## Features of this image
 
 We have added a few plugins by default:
@@ -19,7 +22,7 @@ We have added a few plugins by default:
 More can be added in the marketplace in the WebUI.
 
 
-## Usage
+## How to use this image
 
 ```
 docker run -p 80:80 \
