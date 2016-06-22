@@ -7,7 +7,7 @@
 
 Codiad is a web-based IDE framework with a small footprint and minimal requirements.
 
-![Screenshot of Codiad](docs/screenshot.png)
+![Screenshot of Codiad](https://github.com/wernight/docker-codiad/raw/master/docs/screenshot.png)
 
 
 ## Features of this image
@@ -39,7 +39,7 @@ docker run -p 80:80 \
 * `-v /config` ‒ persists configuration (you may also use a Docker volume).
 * `-e PUID` and `-e PGID` ‒ UserID and GroupID under which to run, see below for explanation.
 
-It is based on [phusion-baseimage](https://github.com/phusion/baseimage-docker) with ssh removed (if you need shell access whilst the container is running do `docker exec -it my-codiad-container-name bash`).
+It is based on [linuxserver/baseimage.apache](https://hub.docker.com/r/linuxserver/baseimage.apache/) which is a [phusion-baseimage](https://github.com/phusion/baseimage-docker) with ssh removed (if you need shell access whilst the container is running do `docker exec -it my-codiad-container-name bash`).
 
 
 ### User / Group Identifiers
@@ -48,14 +48,14 @@ It is based on [phusion-baseimage](https://github.com/phusion/baseimage-docker) 
 
 Part of what makes our containers work so well is by allowing you to specify your own `PUID` and `PGID`. This avoids nasty permissions errors with relation to data volumes (`-v` flags). When an application is installed on the host OS it is normally added to the common group called users, Docker apps due to the nature of the technology can't be added to this group. So we added this feature to let you easily choose when running your containers.
 
-## Setting up the application 
+### Setting up the application 
 
-  * use `/config/projects` to save your projects, for data persistence
-  * change `/config/www/plugins/Codiad-CodeGit-master/shell.sh` to add Git User/Pass
-  * change `/config/www/plugins/Codiad-Terminal-master/emulator/term.php` to change terminal password
+  * Use `/config/projects` to save your projects, for data persistence.
+  * Change `/config/www/plugins/Codiad-CodeGit-master/shell.sh` to add Git user/pass.
+  * Change `/config/www/plugins/Codiad-Terminal-master/emulator/term.php` to change terminal password.
 
 
-## Updates
+### Updates
 
   * Upgrade to the latest version simply `docker restart codiad`.
   * To monitor the logs of the container in realtime `docker logs -f codiad`.
