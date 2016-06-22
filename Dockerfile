@@ -14,9 +14,19 @@ RUN set -x \
 
 # Add some files .
 COPY defaults/ /defaults/
-COPY init/ /etc/my_init.d/
-RUN chmod -v +x /etc/service/*/run /etc/my_init.d/*.sh
+
+RUN set -x \
+    # Base program.
+ && mkdir -p /config/projects \
+ && git clone https://github.com/Codiad/Codiad /config/www \
+ && cp /defaults/config.php /config/www/config.php \
+    # Fix ownership
+ && chown -R abc:abc /config
+
+VOLUME /config
 
 # Ports and volumes.
 EXPOSE 80 443
-VOLUME /config
+
+# Remove error on collaboration on startup.
+CMD [[ -e /config/www/components/active/class.active.php ]] && sed -i s/' echo formatJSEND("error","Warning: File ".'/'#echo formatJSEND("error","Warning: File ".'/ /config/www/components/active/class.active.php; "/sbin/my_init"
