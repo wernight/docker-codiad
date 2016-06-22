@@ -9,17 +9,7 @@ Codiad is a web-based IDE framework with a small footprint and minimal requireme
 
 ![Screenshot of Codiad](https://github.com/wernight/docker-codiad/raw/master/docs/screenshot.png)
 
-
-## Features of this image
-
-We have added a few plugins by default:
-
-  * Collaboration - https://github.com/Codiad/Codiad-Collaborative
-  * Terminal - https://github.com/Fluidbyte/Codiad-Terminal
-  * CodeGit - https://github.com/Andr3as/Codiad-CodeGit
-  * Drag and Drop - https://github.com/Andr3as/Codiad-DragDrop
-
-More can be added in the marketplace in the WebUI.
+You can add [many plugins](http://market.codiad.com/) from the Web UI by opening the right side bar and clicking Marketplace.
 
 
 ## How to use this image
@@ -36,7 +26,7 @@ docker run -p 80:80 \
 
 * `-p 80` ‒ the port(s) to expose.
 * `-v /etc/localtime` ‒ *(optional)* used for timesync.
-* `-v /config` ‒ persists configuration (you may also use a Docker volume).
+* `-v /config` ‒ persists your configuration and installed plugins (you may also use a Docker volume).
 * `-e PUID` and `-e PGID` ‒ UserID and GroupID under which to run, see below for explanation.
 
 It is based on [linuxserver/baseimage.apache](https://hub.docker.com/r/linuxserver/baseimage.apache/) which is a [phusion-baseimage](https://github.com/phusion/baseimage-docker) with ssh removed (if you need shell access whilst the container is running do `docker exec -it my-codiad-container-name bash`).
