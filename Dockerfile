@@ -1,21 +1,22 @@
 FROM linuxserver/baseimage.apache
-MAINTAINER smdion <me@seandion.com>
+MAINTAINER Werner Beroux <werner@beroux.com>
 
-ENV APTLIST="git expect php5-ldap"
+# Install required packages.
+RUN set -x \
+    apt-get update -q && \
+    apt-get install -q -y \
+        git \
+        expect \
+        php5-ldap && \
+    # Cleanup
+    apt-get clean -y && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# install main packages
-RUN apt-get update -q && \
-apt-get install $APTLIST -qy && \
-
-# cleanup
-apt-get clean -y && \
-rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# add some files 
-ADD defaults/ /defaults/
-ADD init/ /etc/my_init.d/
+# Add some files .
+COPY defaults/ /defaults/
+COPY init/ /etc/my_init.d/
 RUN chmod -v +x /etc/service/*/run /etc/my_init.d/*.sh
 
-# ports and volumes
+# Ports and volumes.
 EXPOSE 80 443
 VOLUME /config
