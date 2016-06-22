@@ -1,10 +1,4 @@
-![https://linuxserver.io](http://www.linuxserver.io/wp-content/uploads/2015/06/linuxserver_medium.png)
-
-The [LinuxServer.io](https://www.linuxserver.io/) team brings you another quality container release featuring auto-update on startup, easy user mapping and community support. Be sure to checkout our [forums](https://forum.linuxserver.io/index.php) or for real-time support our [IRC](https://www.linuxserver.io/index.php/irc/) on freenode at `#linuxserver.io`.
-
-# linuxserver/codiad
-
-Codiad is a web-based IDE framework with a small footprint and minimal requirements. We have added a few plugins. More can be added in the marketplace in the WebUI
+Codiad is a web-based IDE framework with a small footprint and minimal requirements. We have added a few plugins. More can be added in the marketplace in the WebUI.
 
 * Collaboration - https://github.com/Codiad/Codiad-Collaborative
 * Terminal - https://github.com/Fluidbyte/Codiad-Terminal
@@ -15,18 +9,22 @@ Codiad is a web-based IDE framework with a small footprint and minimal requireme
 ## Usage
 
 ```
-docker create --name=codiad -v /etc/localtime:/etc/localtime:ro -v <path to data>:/config -e PGID=<gid> -e PUID=<uid>  -p 80:80 linuxserver/codiad
+docker run -p 80:80 \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v $PWD/config:/config \
+    -e PUID=$UID -e PGID=$GID \
+    linuxserver/codiad
 ```
 
-**Parameters**
+**Parameters:**
 
-* `-p 80` - the port(s)
-* `-v /etc/localtime` for timesync - *optional*
-* `-v /config` -
-* `-e PGID` for GroupID - see below for explanation
-* `-e PUID` for UserID - see below for explanation
+* `-p 80` ‒ the port(s) to expose.
+* `-v /etc/localtime` ‒ *(optional)* used for timesync.
+* `-v /config` ‒ persists configuration (you may also use a Docker volume).
+* `-e PUID` and `-e PGID` ‒ UserID and GroupID under which to run, see below for explanation.
 
-It is based on phusion-baseimage with ssh removed, for shell access whilst the container is running do `docker exec -it codiad /bin/bash`.
+It is based on [phusion-baseimage](https://github.com/phusion/baseimage-docker) with ssh removed (if you need shell access whilst the container is running do `docker exec -it my-codiad-container-name bash`).
+
 
 ### User / Group Identifiers
 
@@ -35,16 +33,23 @@ It is based on phusion-baseimage with ssh removed, for shell access whilst the c
 Part of what makes our containers work so well is by allowing you to specify your own `PUID` and `PGID`. This avoids nasty permissions errors with relation to data volumes (`-v` flags). When an application is installed on the host OS it is normally added to the common group called users, Docker apps due to the nature of the technology can't be added to this group. So we added this feature to let you easily choose when running your containers.
 
 ## Setting up the application 
+
 * use /config/projects to save your projects, for data persistence
 * change /config/www/plugins/Codiad-CodeGit-master/shell.sh to add Git User/Pass
 * change /config/www/plugins/Codiad-Terminal-master/emulator/term.php to change terminal password
+
+
 ## Updates
 
 * Upgrade to the latest version simply `docker restart codiad`.
 * To monitor the logs of the container in realtime `docker logs -f codiad`.
 
 
-
 ## Versions
 
-+  **06.11.2015:** Initial Release
+  - **2016-06-22:** Initial release based on the excellent [LinuxServer.io codiac image](https://github.com/linuxserver/docker-codiad)
+
+
+## Feedbacks
+
+Suggestions are welcome on our [GitHub issue tracker]().
