@@ -14,20 +14,18 @@ You can add [many plugins](http://market.codiad.com/) from the Web UI by opening
 
 ## How to use this image
 
-```
-docker run -p 80:80 \
-    -v /etc/localtime:/etc/localtime:ro \
-    -v $PWD/config:/config \
-    -e PUID=$UID -e PGID=$GID \
-    wernight/codiad
-```
+    docker run -p 80:80 \
+        -v /etc/localtime:/etc/localtime:ro \
+        -v $PWD/config:/config \
+        -e PUID=$UID -e PGID=$GID \
+        wernight/codiad
 
 **Parameters:**
 
-* `-p 80` ‒ the port(s) to expose.
-* `-v /etc/localtime` ‒ *(optional)* used for timesync.
-* `-v /config` ‒ persists your configuration and installed plugins (you may also use a Docker volume).
-* `-e PUID` and `-e PGID` ‒ *(optional)* UserID and GroupID under which to run, see below for explanation (defaults to `911`).
+  * `-p 80` ‒ the port(s) to expose.
+  * `-v /etc/localtime` ‒ *(optional)* used for timesync.
+  * `-v /config` ‒ persists your configuration and installed plugins (you may also use a Docker volume).
+  * `-e PUID` and `-e PGID` ‒ *(optional)* UserID and GroupID under which to run, see below for explanation (defaults to `911`).
 
 It is currently based on [linuxserver/baseimage.apache](https://hub.docker.com/r/linuxserver/baseimage.apache/) which is a [phusion-baseimage](https://github.com/phusion/baseimage-docker) with ssh removed (if you need shell access whilst the container is running do `docker exec -it my-codiad-container-name bash`).
 
@@ -39,7 +37,7 @@ It is currently based on [linuxserver/baseimage.apache](https://hub.docker.com/r
 Part of what makes our containers work so well is by allowing you to specify your own `PUID` and `PGID`. This avoids nasty permissions errors with relation to data volumes (`-v` flags). When an application is installed on the host OS it is normally added to the common group called users, Docker apps due to the nature of the technology can't be added to this group. So we added this feature to let you easily choose when running your containers.
 
 
-### Setting up the application 
+### Setting up your projects
 
   * Store your projects somewhere below `/config/`, for data persistence (or mount another volume).
   * Install common [plug-ins](http://market.codiad.com/) via the web interface, like:
@@ -56,6 +54,7 @@ Part of what makes our containers work so well is by allowing you to specify you
       * [Drag and Drop](https://github.com/Andr3as/Codiad-DragDrop)
       * [Emmet](https://github.com/Andr3as/Codiad-Emmet)
       * ...
+   * Check [Codiad Hot-Keys](https://github.com/Codiad/Codiad/wiki/Hot-Keys)
 
 
 ### Updates
