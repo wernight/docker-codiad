@@ -18,6 +18,7 @@ COPY defaults/ /defaults/
 RUN set -x \
     # Base program.
  && mkdir -p /config/projects \
+ && rm -rf /config/www/* \
  && git clone https://github.com/Codiad/Codiad /config/www \
  && cp /defaults/config.php /config/www/config.php \
     # Fix ownership
