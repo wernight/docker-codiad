@@ -27,7 +27,7 @@ docker run -p 80:80 \
 * `-p 80` ‒ the port(s) to expose.
 * `-v /etc/localtime` ‒ *(optional)* used for timesync.
 * `-v /config` ‒ persists your configuration and installed plugins (you may also use a Docker volume).
-* `-e PUID` and `-e PGID` ‒ UserID and GroupID under which to run, see below for explanation.
+* `-e PUID` and `-e PGID` ‒ *(optional)* UserID and GroupID under which to run, see below for explanation (defaults to `911`).
 
 It is based on [linuxserver/baseimage.apache](https://hub.docker.com/r/linuxserver/baseimage.apache/) which is a [phusion-baseimage](https://github.com/phusion/baseimage-docker) with ssh removed (if you need shell access whilst the container is running do `docker exec -it my-codiad-container-name bash`).
 
