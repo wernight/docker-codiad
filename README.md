@@ -14,8 +14,8 @@ You can add [many plugins](http://market.codiad.com/) from the Web UI by opening
 
 ### Features of this image
 
-  * Runs as non-root.
-  * Based on Alpine (very small) with S6 supervisor (lightweight).
+  * Runs as non-root (Nginx and PHP-FPM run as `nginx` user once started).
+  * Based on Alpine (very small, below 100 MB) with S6 supervisor (lightweight).
   * Using Nginx + PHP-FPM (very proformant).
   * Includes a brute-force attack protection.
 
@@ -64,7 +64,7 @@ Upgrade to the latest version simply `docker restart my-codiad-container-name`.
 
 ## Versions
 
-  * **2016096-24:** Base on Alpine + S6 + Nginx + PHP-FPM.
+  * **2016-06-24:** Base on Alpine + S6 + Nginx + PHP-FPM.
   * **2016-06-23:** Removed plug-ins and inlined this repos' init scripts.
   * **2016-06-22:** Initial release based on the excellent [LinuxServer.io codiac image](https://github.com/linuxserver/docker-codiad)
 
