@@ -5,7 +5,7 @@
 
 ## What is Codiad
 
-Codiad is a web-based IDE framework with a small footprint and minimal requirements.
+[**Codiad**](http://codiad.com/) is a web-based IDE framework with a small footprint and minimal requirements.
 
 ![Screenshot of Codiad](https://github.com/wernight/docker-codiad/raw/master/docs/screenshot.png)
 
