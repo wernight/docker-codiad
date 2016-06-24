@@ -8,7 +8,7 @@
 // CONFIG
 //////////////////////////////////////////////////////////////////
 // PATH TO CODIAD
-define("BASE_PATH", "/config/www/");
+define("BASE_PATH", "/code/");
 // BASE URL TO CODIAD (without trailing slash)
 define("BASE_URL", "localhost");
 // THEME : default, modern or clear (look at /themes)
@@ -18,7 +18,7 @@ define("WHITEPATHS", BASE_PATH . ",/home,/");
 // SESSIONS (e.g. 7200)
 $cookie_lifetime = "0";
 // TIMEZONE
-date_default_timezone_set("America/Chicago");
+date_default_timezone_set("UTC");
 // Allows to overwrite the default language
 //define("LANGUAGE", "en");
 // External Authentification
@@ -40,4 +40,3 @@ define("MARKETURL", "http://market.codiad.com/json");
 //define("UPDATEURL", "http://update.codiad.com/?v={VER}&o={OS}&p={PHP}&w={WEB}&a={ACT}");
 //define("ARCHIVEURL", "https://github.com/Codiad/Codiad/archive/master.zip");
 //define("COMMITURL", "https://api.github.com/repos/Codiad/Codiad/commits");
-?>

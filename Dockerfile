@@ -1,33 +1,32 @@
-FROM linuxserver/baseimage.apache
+FROM alpine:3.4
 MAINTAINER Werner Beroux <werner@beroux.com>
 
 # Install required packages.
 RUN set -x \
- && apt-get update -q \
- && apt-get install -q -y \
-        git \
+ && apk add --no-cache --update \
         expect \
+        git \
+        nginx \
+        php5-fpm \
+        php5-json \
         php5-ldap \
-    # Cleanup
- && apt-get clean -y \
- && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+        php5-openssl \
+        php5-zip \
+        s6 \
+    # forward request and error logs to docker log collector
+ && ln -sf /dev/stdout /var/log/nginx/access.log \
+ && ln -sf /dev/stderr /var/log/nginx/error.log
 
-# Add some files .
-COPY defaults/ /defaults/
+# Codiad and config files.
+RUN git clone https://github.com/Codiad/Codiad /default-code
+COPY conf /
 
-RUN set -x \
-    # Base program.
- && mkdir -p /config/projects \
- && rm -rf /config/www/* \
- && git clone https://github.com/Codiad/Codiad /config/www \
- && cp /defaults/config.php /config/www/config.php \
-    # Fix ownership
- && chown -R abc:abc /config
-
-VOLUME /config
+RUN mkdir /code && chown -R nginx /code
+VOLUME /code
 
 # Ports and volumes.
-EXPOSE 80 443
+EXPOSE 80
 
 # Remove error on collaboration on startup.
-CMD [[ -e /config/www/components/active/class.active.php ]] && sed -i s/' echo formatJSEND("error","Warning: File ".'/'#echo formatJSEND("error","Warning: File ".'/ /config/www/components/active/class.active.php; "/sbin/my_init"
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["s6-svscan", "/etc/s6"]
