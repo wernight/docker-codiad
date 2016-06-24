@@ -7,6 +7,7 @@ RUN set -x \
         expect \
         git \
         nginx \
+        openssh-client \
         php5-fpm \
         php5-json \
         php5-ldap \
