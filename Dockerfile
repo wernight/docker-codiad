@@ -14,10 +14,8 @@ RUN set -x \
         php5-openssl \
         php5-zip \
         s6 \
-    # Run as random UID/GUI.
+    # Create non-root user (with a randomly chosen UID/GUI).
  && adduser john -Du 2743 -h /code/workspace \
- && sed -i 's/user = nobody/user = john/' /etc/php5/php-fpm.conf \
- && sed -i 's/group = nobody/group = www-data/' /etc/php5/php-fpm.conf \
     # forward request and error logs to docker log collector
  && ln -sf /dev/stdout /var/log/nginx/access.log \
  && ln -sf /dev/stderr /var/log/nginx/error.log
