@@ -14,7 +14,7 @@ You can add [many plugins](http://market.codiad.com/) from the Web UI by opening
 
 ### Features of this image
 
-  * Runs as non-root (Nginx and PHP-FPM run as `nginx` user once started).
+  * Runs as non-root (Nginx run as `nginx` and PHP-FPM run as random UID `2743` user once started).
   * Based on Alpine (very small, below 100 MB) with S6 supervisor (lightweight).
   * Using Nginx + PHP-FPM (very performant).
   * Includes a brute-force attack protection.
