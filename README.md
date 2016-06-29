@@ -16,7 +16,7 @@ You can add [many plugins](http://market.codiad.com/) from the Web UI by opening
 ### Features of this image
 
   * **Simple or Lean**:
-      * `latest` (~600MB) is based on Ubuntu, contains `docker` binaries and allows easily adding required development tools.
+      * `latest` (~600MB) is based on Ubuntu, contains `docker` and `docker-compose` binaries, and is easy to extend so as to include required development tools.
       * `alpine` (~90MB) is base on Linux Alpine (very small) with S6 supervisor (lightweight) but a few features may not work.
   * **Performant**: Using Nginx + PHP-FPM (very performant).
   * **Secure**:
@@ -82,7 +82,7 @@ Now you can just build and use your new image:
 
 ## Versions
 
-  * **2016-06-29:** Include `docker` to allow building stuff from within Codiad.
+  * **2016-06-29:** Include `docker` and `docker-compose` to allow building stuff from within Codiad.
   * **2016-06-29:** Makes `latest` based on Ubuntu due to some bugs and to allow extending; keep `alpine` as a branch.
   * **2016-06-24:** Base on Alpine + S6 + Nginx + PHP-FPM.
   * **2016-06-23:** Removed plug-ins and inlined this repos' init scripts.
