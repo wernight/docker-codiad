@@ -16,8 +16,8 @@ RUN set -x \
         php7.0-ldap \
         php7.0-mbstring \
         php7.0-zip \
-    # Install docker-compose for containers (see https://docs.docker.com/compose/install/#/install-as-a-container).
- && LATEST_DOCKER_COMPOSE_URI=$(curl -L https://github.com/docker/compose/releases/latest | grep -o '[^\"]*/run.sh') \
+    # Install docker-compose.
+ && LATEST_DOCKER_COMPOSE_URI=$(curl -L https://github.com/docker/compose/releases/latest | grep -o '[^\"]*/docker-compose-Linux-x86_64') \
  && curl -L "https://github.com/$LATEST_DOCKER_COMPOSE_URI" > /usr/local/bin/docker-compose \
  && chmod +x /usr/local/bin/docker-compose \
     # Install S6.
