@@ -1,6 +1,7 @@
 # Supported tags and respective `Dockerfile` links
 
   * [`latest` (Dockerfile)](https://github.com/wernight/docker-codiad/blob/master/Dockerfile)
+  * [`alpine` (Dockerfile)](https://github.com/wernight/docker-codiad/blob/alpine/Dockerfile)
 
 
 ## What is Codiad
@@ -14,10 +15,13 @@ You can add [many plugins](http://market.codiad.com/) from the Web UI by opening
 
 ### Features of this image
 
-  * Runs as non-root (Nginx run as `nginx` and PHP-FPM run as random UID `2743` user once started).
-  * Based on Alpine (very small, below 100 MB) with S6 supervisor (lightweight).
-  * Using Nginx + PHP-FPM (very performant).
-  * Includes a brute-force attack protection.
+  * **Lean**:
+      * `latest` (~500MB) is based on Ubuntu to allow easily adding required development tools.
+      * `alpine` (~90MB) is base on Linux Alpine (very small) with S6 supervisor (lightweight) but a few features may not work.
+  * **Performant**: Using Nginx + PHP-FPM (very performant).
+  * **Secure**:
+      * Runs as non-root (Nginx run as `nginx` and PHP-FPM run as random UID `2743` user once started).
+      * Includes a brute-force attack protection.
 
 
 
@@ -42,7 +46,7 @@ Then open your browser at `http://localhost:8080`.
   * Store your projects somewhere below `/code/`, for data persistence (or mount another volume).
   * Install common [plug-ins](http://market.codiad.com/) via the web interface, like:
       * [Collaboration](https://github.com/Codiad/Codiad-Collaborative)
-      * [Terminal](https://github.com/Fluidbyte/Codiad-Terminal) 
+      * [Terminal](https://github.com/Fluidbyte/Codiad-Terminal)
           * Change `/code/plugins/Codiad-Terminal-master/emulator/term.php` to change terminal password (default is `terminal`).
       * [CodeGit](https://github.com/Andr3as/Codiad-CodeGit)
           * Change `/code/plugins/Codiad-CodeGit-master/shell.sh` to add Git user/pass.
@@ -57,13 +61,23 @@ Then open your browser at `http://localhost:8080`.
    * Check [Codiad Hot-Keys](https://github.com/Codiad/Codiad/wiki/Hot-Keys)
 
 
-### Updates
+### Extending the capabilies
 
-Upgrade to the latest version simply `docker restart my-codiad-container-name`.
+If you want more than just the editor and for example *compile your source code*,
+then you probably want to extend this image. Simply create a `Dockerfile` like:
+
+    FROM wernight/codiad
+    RUN apt update && apt install -y build-essential python
+
+Now you can just compile and use it:
+
+    $ docker build -t codiad .
+    $ docker run --rm -p 8080:80 codiad
 
 
 ## Versions
 
+  * **2016-06-29:** Makes `latest` based on Ubuntu due to some bugs and to allow extending; keep `alpine` as a branch.
   * **2016-06-24:** Base on Alpine + S6 + Nginx + PHP-FPM.
   * **2016-06-23:** Removed plug-ins and inlined this repos' init scripts.
   * **2016-06-22:** Initial release based on the excellent [LinuxServer.io codiac image](https://github.com/linuxserver/docker-codiad)
