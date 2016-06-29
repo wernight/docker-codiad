@@ -22,7 +22,7 @@ RUN set -x \
 
 # Codiad and config files.
 RUN git clone https://github.com/Codiad/Codiad /default-code
-COPY conf /
+COPY root /
 
 RUN mkdir /code && chown -R nginx /code
 VOLUME /code
