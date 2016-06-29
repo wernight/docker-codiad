@@ -15,7 +15,7 @@ You can add [many plugins](http://market.codiad.com/) from the Web UI by opening
 
 ### Features of this image
 
-  * **Lean**:
+  * **Simple or Lean**:
       * `latest` (~500MB) is based on Ubuntu to allow easily adding required development tools.
       * `alpine` (~90MB) is base on Linux Alpine (very small) with S6 supervisor (lightweight) but a few features may not work.
   * **Performant**: Using Nginx + PHP-FPM (very performant).
@@ -57,22 +57,24 @@ Then open your browser at `http://localhost:8080`.
                 cat ~/.ssh/id_rsa.pub
       * [Drag and Drop](https://github.com/Andr3as/Codiad-DragDrop)
       * [Emmet](https://github.com/Andr3as/Codiad-Emmet)
+      * [Macro](https://github.com/daeks/Codiad-Macro)
       * ...
    * Check [Codiad Hot-Keys](https://github.com/Codiad/Codiad/wiki/Hot-Keys)
 
 
 ### Extending the capabilies
 
-If you want more than just the editor and for example *compile your source code*,
-then you probably want to extend this image. Simply create a `Dockerfile` like:
+If you want more than just the editor and for example **build and run Docker images**
+(e.g. using the Terminal plugin or Macros plugin), then install Docker on the host
+and create a `Dockerfile` like:
 
     FROM wernight/codiad
-    RUN apt update && apt install -y build-essential python
+    RUN apt update && apt install -y docker.io
 
-Now you can just compile and use it:
+Now you can just build and use your new image:
 
     $ docker build -t codiad .
-    $ docker run --rm -p 8080:80 codiad
+    $ docker run --rm -p 8080:80 -v /var/run/docker.sock:/var/run/docker.sock codiad
 
 
 ## Versions
