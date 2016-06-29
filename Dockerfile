@@ -6,6 +6,8 @@ RUN set -x \
  && export DEBIAN_FRONTEND=noninteractive \
  && apt update \
  && apt install -y \
+        curl \
+        docker.io \
         expect \
         git \
         nginx \

@@ -16,7 +16,7 @@ You can add [many plugins](http://market.codiad.com/) from the Web UI by opening
 ### Features of this image
 
   * **Simple or Lean**:
-      * `latest` (~500MB) is based on Ubuntu to allow easily adding required development tools.
+      * `latest` (~600MB) is based on Ubuntu, contains `docker` binaries and allows easily adding required development tools.
       * `alpine` (~90MB) is base on Linux Alpine (very small) with S6 supervisor (lightweight) but a few features may not work.
   * **Performant**: Using Nginx + PHP-FPM (very performant).
   * **Secure**:
@@ -28,17 +28,21 @@ You can add [many plugins](http://market.codiad.com/) from the Web UI by opening
 ## How to use this image
 
     docker run --rm -p 8080:80 \
-        -v /etc/localtime:/etc/localtime:ro \
         -v $PWD/code:/code \
+        -v /etc/localtime:/etc/localtime:ro \
+        -v /var/run/docker.sock:/var/run/docker.sock:ro \
         wernight/codiad
 
 Then open your browser at `http://localhost:8080`.
 
 **Parameters:**
 
-  * `-p 80` ‒ the port(s) to expose.
-  * `-v /etc/localtime` ‒ *(optional)* used for timesync.
+  * `-p 80` ‒ the port to expose.
   * `-v /code` ‒ persists your configuration and installed plugins (you may also use a Docker volume).
+  * `-v /etc/localtime` ‒ *(optional)* used for timesync.
+  * `-v /var/run/docker.sock` ‒ *(optional)* allows to **build and run Docker images** from within Codiad
+    (e.g. using the Terminal plugin or Macros plugin). It also gives often nearly `root` access to your Codiad
+    users so use it with care.
 
 
 ### Setting up your projects
@@ -64,21 +68,21 @@ Then open your browser at `http://localhost:8080`.
 
 ### Extending the capabilies
 
-If you want more than just the editor and for example **build and run Docker images**
-(e.g. using the Terminal plugin or Macros plugin), then install Docker on the host
-and create a `Dockerfile` like:
+You can easily extend to include tool you may need and have them ready
+whenever you re-create your container. Just create a `Dockerfile` like:
 
     FROM wernight/codiad
-    RUN apt update && apt install -y docker.io
+    RUN apt update && apt install -y build-essential python
 
 Now you can just build and use your new image:
 
     $ docker build -t codiad .
-    $ docker run --rm -p 8080:80 -v /var/run/docker.sock:/var/run/docker.sock codiad
+    $ docker run --rm -p 8080:80 codiad
 
 
 ## Versions
 
+  * **2016-06-29:** Include `docker` to allow building stuff from within Codiad.
   * **2016-06-29:** Makes `latest` based on Ubuntu due to some bugs and to allow extending; keep `alpine` as a branch.
   * **2016-06-24:** Base on Alpine + S6 + Nginx + PHP-FPM.
   * **2016-06-23:** Removed plug-ins and inlined this repos' init scripts.
