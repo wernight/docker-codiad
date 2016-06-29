@@ -17,10 +17,10 @@ You can add [many plugins](http://market.codiad.com/) from the Web UI by opening
 
   * **Simple or Lean**:
       * `latest` (~600MB) is based on Ubuntu, contains `docker` and `docker-compose` binaries, and is easy to extend so as to include required development tools.
-      * `alpine` (~90MB) is base on Linux Alpine (very small) with S6 supervisor (lightweight) but a few features may not work.
+      * `alpine` (~90MB) is base on Linux Alpine (very small) with S6 supervisor (lightweight) but a few features may not work; does not support custom `CODIAD_UID`/`CODIAD_GID`.
   * **Performant**: Using Nginx + PHP-FPM (very performant).
   * **Secure**:
-      * Runs as non-root (Nginx run as `nginx` and PHP-FPM run as random UID `2743` user once started).
+      * Runs as non-root (Nginx run as `nginx` and PHP-FPM run as UID `2743` by default once started).
       * Includes a brute-force attack protection.
 
 
@@ -28,6 +28,7 @@ You can add [many plugins](http://market.codiad.com/) from the Web UI by opening
 ## How to use this image
 
     docker run --rm -p 8080:80 \
+        -e CODIAD_UID=$UID -e CODIAD_GID=$GID \
         -v $PWD/code:/code \
         -v /etc/localtime:/etc/localtime:ro \
         -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -38,11 +39,21 @@ Then open your browser at `http://localhost:8080`.
 **Parameters:**
 
   * `-p 80` ‒ the port to expose.
-  * `-v /code` ‒ persists your configuration and installed plugins (you may also use a Docker volume).
+  * `-e CODIAD_UID` and `-e CODIAD_GID` ‒ *(optional)* sets the user / group ID to use for PHP
+    (i.e. it'll be the user / group under which all Codiad users will execute commands if they use the Terminal plugin or such).
+  * `-v /code` ‒ *(optional)* persists your configuration and installed plugins (you may also use a Docker volume).
   * `-v /etc/localtime` ‒ *(optional)* used for timesync.
   * `-v /var/run/docker.sock` ‒ *(optional)* allows to **build and run Docker images** from within Codiad
     (e.g. using the Terminal plugin or Macros plugin). It also gives often nearly `root` access to your Codiad
-    users so use it with care.
+    users so use it with care. If you see client API incompatible, you may try to mount also `-v /usr/bin/docker:/usr/bin/docker:ro`.
+    Just ensure that user `CODIAD_UID:CODIAD_GID` has read access to that socket file.
+
+
+### User / Group Identifiers
+
+TL;DR - The `CODIAD_UID` and `CODIAD_UID` values set the user / group you'd like your container to 'run as'. This can be a user you've created or even root (not recommended).
+
+Part of what makes our containers work so well is by allowing you to specify your own PUID and PGID. This avoids nasty permissions errors with relation to data volumes (-v flags). When an application is installed on the host OS it is normally added to the common group called users, Docker apps due to the nature of the technology can't be added to this group. So we added this feature to let you easily choose when running your containers.
 
 
 ### Setting up your projects

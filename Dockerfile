@@ -48,7 +48,7 @@ RUN set -x \
  && apt clean \
  && rm -rf /var/lib/apt/lists/* \
     # Create non-root user (with a randomly chosen UID/GUI).
- && adduser john --system --uid 2743 --home /code/workspace \
+ && adduser john --system --uid 2743 --group --home /code/workspace \
     # forward request and error logs to docker log collector
  && ln -sf /dev/stdout /var/log/nginx/access.log \
  && ln -sf /dev/stderr /var/log/nginx/error.log
