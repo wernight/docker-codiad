@@ -15,6 +15,7 @@ RUN set -x \
         php7.0-json \
         php7.0-ldap \
         php7.0-mbstring \
+        php7.0-xml \
         php7.0-zip \
     # Install docker-compose.
  && LATEST_DOCKER_COMPOSE_URI=$(curl -L https://github.com/docker/compose/releases/latest | grep -o '[^\"]*/docker-compose-Linux-x86_64') \
