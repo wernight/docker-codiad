@@ -1,7 +1,7 @@
 # Supported tags and respective `Dockerfile` links
 
   * [`latest` (Dockerfile)](https://github.com/wernight/docker-codiad/blob/master/Dockerfile) [![](https://images.microbadger.com/badges/image/wernight/codiad.svg)](https://microbadger.com/images/wernight/codiad "Get your own image badge on microbadger.com")
-  * [`alpine` (Dockerfile)](https://github.com/wernight/docker-codiad/blob/alpine/Dockerfile)
+  * [`alpine` (Dockerfile)](https://github.com/wernight/docker-codiad/blob/alpine/Dockerfile) [![](https://images.microbadger.com/badges/image/wernight/codiad:alpine.svg)](https://microbadger.com/images/wernight/codiad "Get your own image badge on microbadger.com")
 
 
 ## What is Codiad
