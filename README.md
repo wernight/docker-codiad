@@ -16,8 +16,8 @@ You can add [many plugins](http://market.codiad.com/) from the Web UI by opening
 ### Features of this image
 
   * **Simple or Lean**:
-      * `latest` (~600MB) is based on Ubuntu, contains `docker` and `docker-compose` binaries, and is easy to extend so as to include required development tools.
-      * `alpine` (~90MB) is base on Linux Alpine (very small) with S6 supervisor (lightweight) but a few features may not work; does not support custom `CODIAD_UID`/`CODIAD_GID`.
+      * `latest` is based on Ubuntu, contains `docker` and `docker-compose` binaries, and is easy to extend so as to include required development tools.
+      * `alpine` is base on Linux Alpine (very small) with S6 supervisor (lightweight) but *some features may not work* and it does not support custom `CODIAD_UID`/`CODIAD_GID`.
   * **Performant**: Using Nginx + PHP-FPM (very performant).
   * **Secure**:
       * Runs as non-root (Nginx run as `nginx` and PHP-FPM run as UID `2743` by default once started).
