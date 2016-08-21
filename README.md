@@ -2,6 +2,7 @@
 
   * [`latest` (Dockerfile)](https://github.com/wernight/docker-codiad/blob/master/Dockerfile) [![](https://images.microbadger.com/badges/image/wernight/codiad.svg)](https://microbadger.com/images/wernight/codiad "Get your own image badge on microbadger.com")
   * [`alpine` (Dockerfile)](https://github.com/wernight/docker-codiad/blob/alpine/Dockerfile) [![](https://images.microbadger.com/badges/image/wernight/codiad:alpine.svg)](https://microbadger.com/images/wernight/codiad "Get your own image badge on microbadger.com")
+  * `2`, `2.7`, `2.7.4` (and similar versionned tags) are like `latest` but for a specific version of Codiad.
 
 
 ## What is Codiad
