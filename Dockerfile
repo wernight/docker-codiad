@@ -55,7 +55,9 @@ RUN set -x \
  && ln -sf /dev/stderr /var/log/nginx/error.log
 
 # Codiad and config files.
-RUN git clone https://github.com/Codiad/Codiad /default-code
+RUN git clone https://github.com/Codiad/Codiad /default-code \
+ && cd /default-code \
+ && git checkout v.2.7.4
 COPY root /
 
 RUN chown -R www-data /code
