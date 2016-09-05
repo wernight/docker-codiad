@@ -2,7 +2,7 @@
 
 # Install Codiad if not already installed.
 if [ ! -d '/code/.git' ]; then
-    cp -r /default-code/* /code
+    cp -r /default-code/. /code
     chmod go+w \
         /code/config.php \
         /code/workspace \
