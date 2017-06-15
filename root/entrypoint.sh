@@ -11,4 +11,15 @@ if [ ! -d '/code/.git' ]; then
         /code/data
 fi
 
+# Set user:group ID.
+CODIAD_UID=${CODIAD_UID:-2743}
+CODIAD_GID=${CODIAD_GID:-2743}
+
+if [ ! "$(id -u john)" -eq "$CODIAD_UID" ]; then
+    usermod -o -u "$CODIAD_UID" john
+fi
+if [ ! "$(id -g john)" -eq "$CODIAD_GID" ]; then
+    groupmod -o -g "$CODIAD_GID" john
+fi
+
 exec "$@"
